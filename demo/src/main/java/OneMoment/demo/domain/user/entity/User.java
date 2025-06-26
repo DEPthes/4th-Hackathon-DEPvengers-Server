@@ -17,6 +17,8 @@ public class User {
     private Long id;
     private String ssaid;
     private Integer streak;
+
+    @Column(name = "last_upload", nullable = true)
     private Date lastUpload;
 
     @Builder
