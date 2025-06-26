@@ -1,13 +1,12 @@
 package OneMoment.demo.domain.photo.entity;
 
 import OneMoment.demo.domain.user.entity.User;
-import OneMoment.demo.global.converter.StringListConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Date;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -21,28 +20,25 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String photoURL;
+
+    @Column(name = "mp3_URL", nullable = true, length = 2048)
     private String mp3URL;
 
-    @Column(columnDefinition = "JSON")
-    @Convert(converter = StringListConverter.class)
-    private List<String> tags;
-
     private Date uploadDate;
+
+    @Column(name = "text", nullable = true)
     private String text;
-    private String taskID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @Builder
-    public Photo(String photoURL, String mp3URL, List<String> tags, Date uploadDate, String text, String taskID, User user) {
+    public Photo(String photoURL, String mp3URL, Date uploadDate, String text, User user) {
         this.photoURL = photoURL;
         this.mp3URL = mp3URL;
-        this.tags = tags;
         this.uploadDate = uploadDate;
         this.text = text;
-        this.taskID = taskID;
         this.user = user;
     }
 }
