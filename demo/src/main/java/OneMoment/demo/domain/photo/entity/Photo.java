@@ -19,6 +19,8 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "photo_URL", nullable = true, length = 2048)
     private String photoURL;
 
     @Column(name = "mp3_URL", nullable = true, length = 2048)

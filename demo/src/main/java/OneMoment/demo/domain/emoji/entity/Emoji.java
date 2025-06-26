@@ -15,12 +15,12 @@ public class Emoji {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer happy;
-    private Integer funny;
-    private Integer love;
-    private Integer star;
-    private Integer sad;
-    private Integer angry;
+    private int happy;
+    private int funny;
+    private int love;
+    private int star;
+    private int sad;
+    private int angry;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "photo_id")

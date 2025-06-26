@@ -1,5 +1,7 @@
 package OneMoment.demo.domain.photo.service;
 
+import OneMoment.demo.domain.emoji.entity.Emoji;
+import OneMoment.demo.domain.emoji.repository.EmojiRepository;
 import OneMoment.demo.domain.photo.dto.UrlDto;
 import OneMoment.demo.domain.photo.entity.Photo;
 import OneMoment.demo.domain.photo.repository.PhotoRepository;
@@ -22,6 +24,7 @@ public class PhotoService {
 
     private final PhotoRepository photoRepository;
     private final UserRepository userRepository;
+    private final EmojiRepository emojiRepository;
     private final FileStorageService fileStorageService;
     private final musicService musicService;
 
@@ -44,6 +47,19 @@ public class PhotoService {
                             .mp3URL(musicURl)
                             .uploadDate(today)
                             .user(user)
+                            .build()
+                    );
+
+                    Photo photo = photoRepository.findByMp3URL(musicURl);
+
+                    emojiRepository.save(Emoji.builder()
+                            .funny(0)
+                            .sad(0)
+                            .star(0)
+                            .angry(0)
+                            .love(0)
+                            .happy(0)
+                            .photo(photo)
                             .build()
                     );
 
