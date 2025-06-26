@@ -8,11 +8,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/photo")
@@ -34,5 +33,25 @@ public class PhotoController {
         return ApiResult.ok(url);
     }
 
+    @Operation(summary = "전체 사진 조회", description = "오늘 날짜를 바탕으로 전체 사진 조회")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 저장됨"),
+            @ApiResponse(responseCode = "400", description = "잘못된 입력 값"),
+            @ApiResponse(responseCode = "500", description = "서버 오류 발생")
+    })
+    @GetMapping("/today")
+    public ApiResult<List<PhotoDto>> getPhotos() {
+        return ApiResult.ok(photoService.getPhotos());
+    }
 
+    @Operation(summary = "월별 내 사진 조회", description = "월별 내 사진 조회")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 저장됨"),
+            @ApiResponse(responseCode = "400", description = "잘못된 입력 값"),
+            @ApiResponse(responseCode = "500", description = "서버 오류 발생")
+    })
+    @GetMapping("/my")
+    public ApiResult<List<PhotoDto>> getMyPhotos(String year, String month, String ssaid) {
+        return ApiResult.ok(photoService.getPhotosByUser(ssaid, year, month));
+    }
 }

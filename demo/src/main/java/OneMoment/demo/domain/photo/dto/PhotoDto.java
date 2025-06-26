@@ -11,14 +11,27 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class PhotoDto {
-    private Date uploadDate;
+    private String date;
     private String text;
-    private String taskID;
+    private String imageUrl;
+    private String mp3Url;
+    private int happy;
+    private int funny;
+    private int love;
+    private int star;
+    private int sad;
+
 
     @Builder
-    public PhotoDto(Date uploadDate, String text, String taskID) {
-        this.uploadDate = uploadDate;
+    public PhotoDto(String date, String text, String imageUrl, String mp3Url, int happy, int funny, int love, int star, int sad) {
+        this.date = date;
         this.text = text;
-        this.taskID = taskID;
+        this.imageUrl = imageUrl;
+        this.mp3Url = mp3Url;
+        this.happy = happy;
+        this.funny = funny;
+        this.love = love;
+        this.star = star;
+        this.sad = sad;
     }
 }
