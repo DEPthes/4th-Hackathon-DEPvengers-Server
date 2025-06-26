@@ -9,9 +9,14 @@ spring:
   #DataBase
   datasource:
     url: jdbc:mysql://onemoment-db.cda4coea44n3.ap-northeast-2.rds.amazonaws.com:3306/onemoment
-    username: admin #[DB_USERNAME]
-    password: onemoment2025! #[DB_PASSWORD]
+    username: ${DB_USERNAME} #[DB_USERNAME]
+    password: ${DB_PASSWORD} #[DB_PASSWORD]
     driver-class-name: com.mysql.cj.jdbc.Driver #[JDBC DRIVER]
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 #Swagger
 springdoc:
@@ -31,3 +36,13 @@ springdoc:
     display-request-duration: true
   paths-to-match:
     - /**
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ${AWS_REGION}
+    s3:
+      bucket: ${AWS_S3_BUCKETNAME}
