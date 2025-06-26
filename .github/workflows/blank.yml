@@ -36,7 +36,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/ec2_key.pem
           chmod 600 ~/.ssh/ec2_key.pem
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+          echo "▶ EC2_HOST: '${{ secrets.EC2_HOST }}'"
+          ssh-keyscan -T 10 -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       # 5. Upload .jar & .env
       - name: Upload JAR and .env to EC2
